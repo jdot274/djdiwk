@@ -1,5 +1,5 @@
 run = "npm run dev"
-modules = ["nodejs-20", "python-3.11"]
+modules = ["nodejs-20", "python-3.11", "cpp-clang20"]
 hidden = [".config", "package-lock.json"]
 entrypoint = "index.html"
 
@@ -31,16 +31,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Start application"
+args = "Run C++"
 
 [[workflows.workflow]]
-name = "Start application"
+name = "Run C++"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
+args = "clang++ -o main main.cpp && ./main"
 
 [workflows.workflow.metadata]
-outputType = "webview"
+outputType = "console"
